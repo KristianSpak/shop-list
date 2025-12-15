@@ -19,9 +19,12 @@ import {
 
 // 🔴 TU DOPLŇ SVOJE ÚDAJE
 const firebaseConfig = {
-  apiKey: "XXX",
-  authDomain: "XXX.firebaseapp.com",
-  projectId: "XXX",
+  apiKey: "AIzaSyAwfWUFRLVCE35BuFiqXvFANbw5DThDsUs",
+  authDomain: "shop-list-46c15.firebaseapp.com",
+  projectId: "shop-list-46c15",
+  storageBucket: "shop-list-46c15.firebasestorage.app",
+  messagingSenderId: "914737572872",
+  appId: "1:914737572872:web:1c4ab9da0b07ee31a7b5bd"
 };
 
 const app = initializeApp(firebaseConfig);

@@ -54,8 +54,11 @@ onAuthStateChanged(auth, user => {
 
 // LOGIN
 window.login = async function () {
-  const email = email.value;
-  const password = password.value;
+  const emailInput = document.getElementById("email");
+  const passwordInput = document.getElementById("password");
+
+  const email = emailInput.value;
+  const password = passwordInput.value;
 
   await signInWithEmailAndPassword(auth, email, password);
 };
@@ -83,15 +86,16 @@ function loadItems() {
 
 // ADD
 window.addItem = async function () {
-  const text = document.getElementById("text").value.trim();
-  let count = document.getElementById("count").value || 1;
+    const textInput = document.getElementById("text");
+    const countInput = document.getElementById("count");
 
-  if (!text) return;
+    const text = textInput.value.trim();
+    let count = countInput.value || 1;
 
-  await addDoc(itemsRef, { text, count });
+    await addDoc(itemsRef, { text, count });
 
-  text.value = "";
-  count.value = "";
+    textInput.value = "";
+    countInput.value = "";
 };
 
 // REMOVE (vložené do košíka)

@@ -1,0 +1,47 @@
+body {
+    font-family: system-ui, Arial, sans-serif;
+    max-width: 420px;
+    margin: 30px auto;
+    padding: 10px;
+}
+
+h1 {
+    text-align: center;
+}
+
+input, button {
+    padding: 10px;
+    font-size: 16px;
+}
+
+button {
+    cursor: pointer;
+}
+
+.form {
+    display: flex;
+    gap: 6px;
+}
+
+ul {
+    padding: 0;
+    margin-top: 20px;
+}
+
+li {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.hidden {
+    display: none;
+}
+
+.logout {
+    margin-top: 20px;
+    width: 100%;
+    background: #eee;
+}

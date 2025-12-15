@@ -4,7 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Nákupný zoznam</title>
-  <link rel="stylesheet" href="style.css">
+
+  <!-- PWA manifest -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#4CAF50">
 </head>
 <body>
 
@@ -30,6 +33,27 @@
   <button class="logout" onclick="logout()">Odhlásiť</button>
 </div>
 
-<script type="module" src="script.js"></script>
+<!-- Dynamické načítanie CSS a JS (cache-busting) -->
+<script>
+  const ts = new Date().getTime();
+
+  const link = document.createElement("link");
+  link.rel = "stylesheet";
+  link.href = `style.css?ts=${ts}`;
+  document.head.appendChild(link);
+
+  const script = document.createElement("script");
+  script.type = "module";
+  script.src = `script.js?ts=${ts}`;
+  document.body.appendChild(script);
+
+  // PWA: registrácia service worker
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js')
+      .then(() => console.log('Service Worker registered'))
+      .catch(err => console.log(err));
+  }
+</script>
+
 </body>
 </html>

@@ -1,47 +1,90 @@
 body {
-    font-family: system-ui, Arial, sans-serif;
-    max-width: 420px;
-    margin: 30px auto;
-    padding: 10px;
+  font-family: system-ui, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #fdfdfd;
 }
 
 h1 {
-    text-align: center;
+  text-align: center;
+  padding: 15px;
+  margin: 0;
+  background: #4CAF50;
+  color: white;
+  font-size: 1.8rem;
+}
+
+.container {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 15px;
 }
 
 input, button {
-    padding: 10px;
-    font-size: 16px;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+input {
+  flex: 1;
 }
 
 button {
-    cursor: pointer;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #45a049;
 }
 
 .form {
-    display: flex;
-    gap: 6px;
+  display: flex;
+  gap: 5px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
 }
 
-ul {
-    padding: 0;
-    margin-top: 20px;
+#list {
+  padding: 0;
+  margin: 0;
 }
 
 li {
-    list-style: none;
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  font-size: 1.1rem;
+  word-break: break-word;
+}
+
+li button {
+  background: #ff4d4d;
+  font-size: 1rem;
+  padding: 6px 10px;
+}
+
+li button:hover {
+  background: #e60000;
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
 
 .logout {
-    margin-top: 20px;
-    width: 100%;
-    background: #eee;
+  margin-top: 20px;
+  width: 100%;
+  background: #f44336;
+  color: white;
+}
+
+.logout:hover {
+  background: #d32f2f;
 }

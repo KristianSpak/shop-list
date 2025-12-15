@@ -17,14 +17,11 @@ import {
   onSnapshot
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-// 🔴 DOPLŇ SVOJE ÚDAJE
+// 🔴 TU DOPLŇ SVOJE ÚDAJE
 const firebaseConfig = {
-  apiKey: "AIzaSyAwfWUFRLVCE35BuFiqXvFANbw5DThDsUs",
-  authDomain: "shop-list-46c15.firebaseapp.com",
-  projectId: "shop-list-46c15",
-  storageBucket: "shop-list-46c15.firebasestorage.app",
-  messagingSenderId: "914737572872",
-  appId: "1:914737572872:web:1c4ab9da0b07ee31a7b5bd"
+  apiKey: "XXX",
+  authDomain: "XXX.firebaseapp.com",
+  projectId: "XXX",
 };
 
 const app = initializeApp(firebaseConfig);
@@ -32,7 +29,7 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 const itemsRef = collection(db, "shoppingList");
 
-// udrží prihlásenie aj po refreshe
+// uchovanie loginu v localStorage (zostane prihlásený)
 setPersistence(auth, browserLocalPersistence);
 
 // UI
@@ -40,7 +37,7 @@ const loginDiv = document.getElementById("login");
 const appDiv = document.getElementById("app");
 const listEl = document.getElementById("list");
 
-// AUTH STATE
+// sledovanie auth state
 onAuthStateChanged(auth, user => {
   if (user) {
     loginDiv.classList.add("hidden");
@@ -54,13 +51,20 @@ onAuthStateChanged(auth, user => {
 
 // LOGIN
 window.login = async function () {
-  const emailInput = document.getElementById("email");
-  const passwordInput = document.getElementById("password");
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
 
-  const email = emailInput.value;
-  const password = passwordInput.value;
+  if (!email || !password) {
+    alert("Zadajte email aj heslo");
+    return;
+  }
 
-  await signInWithEmailAndPassword(auth, email, password);
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+  } catch (err) {
+    alert("Zlé prihlasovacie údaje");
+    console.error(err);
+  }
 };
 
 // LOGOUT
@@ -84,21 +88,33 @@ function loadItems() {
   });
 }
 
-// ADD
+// ADD ITEM
 window.addItem = async function () {
-    const textInput = document.getElementById("text");
-    const countInput = document.getElementById("count");
+  const textInput = document.getElementById("text");
+  const countInput = document.getElementById("count");
 
-    const text = textInput.value.trim();
-    let count = countInput.value || 1;
+  const text = textInput.value.trim();
+  let count = parseInt(countInput.value);
+  if (!count || count < 1) count = 1;
 
+  if (!text) return;
+
+  try {
     await addDoc(itemsRef, { text, count });
-
     textInput.value = "";
     countInput.value = "";
+  } catch (err) {
+    console.error("Chyba pri pridávaní:", err);
+    alert("Nepodarilo sa pridať položku");
+  }
 };
 
-// REMOVE (vložené do košíka)
+// REMOVE ITEM (vložené do košíka)
 window.removeItem = async function (id) {
-  await deleteDoc(doc(db, "shoppingList", id));
+  try {
+    await deleteDoc(doc(db, "shoppingList", id));
+  } catch (err) {
+    console.error("Chyba pri mazani:", err);
+    alert("Nepodarilo sa odstrániť položku");
+  }
 };

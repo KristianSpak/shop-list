@@ -1,33 +1,33 @@
 <!DOCTYPE html>
 <html lang="sk">
 <head>
-    <meta charset="UTF-8">
-    <title>Nákupný zoznam</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nákupný zoznam</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <h1>Nákupný zoznam</h1>
 
 <!-- LOGIN -->
-<div id="login">
-    <input id="email" type="email" placeholder="Email">
-    <input id="password" type="password" placeholder="Heslo">
-    <button onclick="login()">Prihlásiť</button>
+<div id="login" class="container">
+  <input id="email" type="email" placeholder="Email" autocomplete="username">
+  <input id="password" type="password" placeholder="Heslo" autocomplete="current-password">
+  <button onclick="login()">Prihlásiť</button>
 </div>
 
 <!-- APP -->
-<div id="app" class="hidden">
-    <div class="form">
-        <input id="text" placeholder="Položka">
-        <input id="count" type="number" min="1" placeholder="Počet">
-        <button onclick="addItem()">Pridať</button>
-    </div>
+<div id="app" class="container hidden">
+  <div class="form">
+    <input id="text" placeholder="Položka">
+    <input id="count" type="number" min="1" placeholder="Počet">
+    <button onclick="addItem()">Pridať</button>
+  </div>
 
-    <ul id="list"></ul>
+  <ul id="list"></ul>
 
-    <button class="logout" onclick="logout()">Odhlásiť</button>
+  <button class="logout" onclick="logout()">Odhlásiť</button>
 </div>
 
 <script type="module" src="script.js"></script>

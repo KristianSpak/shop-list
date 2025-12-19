@@ -88,3 +88,210 @@ li button:hover {
 .logout:hover {
   background: #d32f2f;
 }
+
+.ingredient-row {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 5px;
+}
+
+.ingredient-row input {
+  flex: 1;
+}
+
+#recipeSteps {
+  width: 100%;
+  min-height: 80px; /* počiatočná výška */
+  resize: none;     /* zakáže ručné ťahanie */
+  overflow: hidden; /* aby nebol scroll */
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.modal.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.modal.hide {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5); /* tmavé pozadie */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90%;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.modal .close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.view-button {
+  margin: 5px 5px 0 0;
+}
+
+.category-row {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.category-row input {
+  flex: 1;
+}
+
+.recipes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.recipe-card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;       /* dôležité pre obrázok */
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.recipe-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+}
+
+.recipe-card img {
+  width: 100%;
+  height: 150px;          /* pevná výška karty */
+  object-fit: cover;     /* orezanie bez deformácie */
+  border-radius: 12px;
+  display: block;
+  cursor: pointer;
+}
+
+.recipe-card-content {
+  padding: 10px;
+  flex: 1;
+}
+
+.recipe-card h3 {
+  padding: 12px;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.recipe-card .tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.recipe-card .tag {
+  background: #4caf50;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 5px;
+  font-size: 0.75rem;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.recipes-header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.new-recipe-btn {
+  align-self: flex-start;
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: none;
+  background: #4f46e5;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.new-recipe-btn:hover {
+  background: #4338ca;
+}
+
+.recipe-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.icon-btn {
+  background: #f1f1f1;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 15px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.icon-btn:hover {
+  background: #e0e0e0;
+  transform: scale(1.1);
+}
+
+.icon-btn:active {
+  transform: scale(0.95);
+}
+
+.icon-btn.danger {
+  background: #ffe5e5;
+  margin-left: auto;
+}
+
+.icon-btn.danger:hover {
+  background: #ffb3b3;
+}

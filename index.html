@@ -22,6 +22,10 @@
 
 <!-- APP -->
 <div id="app" class="container hidden">
+  <button onclick="showRecipes()">Recepty</button>
+
+  <h2>Zoznam</h2>
+
   <div class="form">
     <input id="text" placeholder="Položka">
     <input id="count" type="number" min="1" placeholder="Počet">
@@ -32,6 +36,79 @@
 
   <button class="logout" onclick="logout()">Odhlásiť</button>
 </div>
+
+<!-- RECEPTY -->
+<div id="recipes" class="container hidden">
+  <button onclick="showShoppingList()">← Späť na zoznam</button>
+
+  <h2>Recepty</h2>
+<div class="recipes-header">
+ <div class="filters">
+  <input id="searchName" type="text" placeholder="Hľadať podľa názvu" oninput="filterRecipes()">
+  <input id="filterCategoriesInput" list="filterCategoriesDatalist" placeholder="Filtrovať podľa kategórie" oninput="filterRecipes()">
+  <datalist id="filterCategoriesDatalist"></datalist>
+  <input id="searchIngredients" type="text" placeholder="Filtrovať podľa ingrediencií (čiarkou)" oninput="filterRecipes()">
+</div>
+
+  <button onclick="showCreateRecipeForm()" id="newRecipeBtn" class="new-recipe-btn">+ Nový recept</button>
+</div>
+  <!-- Zoznam receptov -->
+  <div id="recipesList" class="recipes-grid"></div>
+  <div id="pagination"></div>
+
+<!-- Modal pre recept (vytváranie, edit, zobrazenie) -->
+<div id="recipeModal" class="modal hidden">
+  <div class="modal-content">
+    <span class="close" onclick="closeRecipeModal()">&times;</span>
+    
+    <h2 id="modalTitle">Nový recept</h2>
+
+    <!-- Pre zobrazenie sa tieto elementy budú schovávať / ukazovať -->
+    <div id="recipeView" class="hidden">
+      <img id="recipeViewPhoto" width="150" style="border-radius:4px;">
+      <p><strong>Kategórie:</strong> <span id="recipeViewCategories"></span></p>
+      <h4>Ingrediencie:</h4>
+      <ul id="recipeViewIngredients"></ul>
+      <h4>Postup:</h4>
+      <p id="recipeViewSteps"></p>
+    </div>
+
+    <div id="recipeEdit">
+      <input id="recipeName" placeholder="Názov receptu">
+
+    <h3>Kategórie</h3>
+    <div id="categoriesContainer"></div>
+    <datalist id="categoriesDatalist"></datalist>
+    <button type="button" onclick="addCategoryInput()">+ Pridať kategóriu</button>
+
+
+      <!-- datalist s existujúcimi kategóriami -->
+      <datalist id="categoriesDatalist"></datalist>
+
+      <h4>Ingrediencie:</h4>
+      <div id="ingredientsContainer"></div>
+      <button type="button" onclick="addIngredientInput()">+ Pridať ingredienciu</button>
+      <!-- datalist pre autocomplete -->
+      <datalist id="ingredientsDatalist"></datalist>
+
+
+      <h4>Postup:</h4>
+      <textarea id="recipeSteps" placeholder="Postup"></textarea>
+
+      <input id="recipePhoto" type="file" accept="image/*">
+
+      <div class="modal-buttons">
+        <button onclick="saveRecipe()">Uložiť</button>
+        <button onclick="closeRecipeModal()">Zrušiť</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+</div>
+
 
 <!-- Dynamické načítanie CSS a JS (cache-busting) -->
 <script>
@@ -46,6 +123,11 @@
   script.type = "module";
   script.src = `script.js?ts=${ts}`;
   document.body.appendChild(script);
+
+  const rscript = document.createElement("script");
+  rscript.type = "module";
+  rscript.src = `recipes.js?ts=${ts}`;
+  document.body.appendChild(rscript);
 
   // PWA: registrácia service worker
   if ('serviceWorker' in navigator) {

@@ -14,10 +14,10 @@ import {
   addDoc,
   deleteDoc,
   doc,
-  onSnapshot
+  onSnapshot,
+  enableIndexedDbPersistence
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-// 🔴 TU DOPLŇ SVOJE ÚDAJE
 const firebaseConfig = {
   apiKey: "AIzaSyAwfWUFRLVCE35BuFiqXvFANbw5DThDsUs",
   authDomain: "shop-list-46c15.firebaseapp.com",
@@ -26,11 +26,14 @@ const firebaseConfig = {
   messagingSenderId: "914737572872",
   appId: "1:914737572872:web:1c4ab9da0b07ee31a7b5bd"
 };
-
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 const itemsRef = collection(db, "shoppingList");
+
+enableIndexedDbPersistence(db).catch(err => {
+  console.error("Firestore offline persistence error:", err.code);
+});
 
 // uchovanie loginu v localStorage (zostane prihlásený)
 setPersistence(auth, browserLocalPersistence);
@@ -83,7 +86,7 @@ function loadItems() {
       const item = docSnap.data();
       const li = document.createElement("li");
       li.innerHTML = `
-        ${item.text} (${item.count}x)
+        ${item.text} (${item.count})
         <button onclick="removeItem('${docSnap.id}')">🛒</button>
       `;
       listEl.appendChild(li);
@@ -120,4 +123,16 @@ window.removeItem = async function (id) {
     console.error("Chyba pri mazani:", err);
     alert("Nepodarilo sa odstrániť položku");
   }
+};
+
+// Prepínanie medzi zoznamom a receptami
+window.showRecipes = function () {
+  appDiv.classList.add("hidden");
+  document.getElementById("recipes").classList.remove("hidden");
+  loadRecipes();
+};
+
+window.showShoppingList = function () {
+  document.getElementById("recipes").classList.add("hidden");
+  appDiv.classList.remove("hidden");
 };

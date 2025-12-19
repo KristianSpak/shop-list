@@ -250,6 +250,8 @@ window.editRecipe = function (id) {
   editingRecipeId = id;
 
   recipeNameInput.value = r.name;
+  recipeEditDiv.classList.remove("hidden");
+  recipeViewDiv.classList.add("hidden");
   setRecipeStepsValue(r.steps);
 
   // Ingrediencie

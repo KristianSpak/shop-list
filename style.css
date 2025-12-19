@@ -226,6 +226,10 @@ li button:hover {
   gap: 5px;
 }
 
+.login {
+  margin: 15px 0 0 0;
+}
+
 .recipe-card .tag {
   background: #4caf50;
   color: white;

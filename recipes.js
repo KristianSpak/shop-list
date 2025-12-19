@@ -175,12 +175,18 @@ window.saveRecipe = async function() {
     return;
   }
 
-  let photoUrl = "";
+  // Base64 fotka
+  let photoUrl = ""; 
   if (recipePhotoInput.files.length > 0) {
     const file = recipePhotoInput.files[0];
-    const storageRef = ref(storage, `recipes/${Date.now()}_${file.name}`);
-    const snapshot = await uploadBytes(storageRef, file);
-    photoUrl = await getDownloadURL(snapshot.ref);
+    photoUrl = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+      reader.readAsDataURL(file); // Base64
+    });
+  } else {
+    photoUrl = DEFAULT_RECIPE_IMAGE; // default
   }
 
   const data = {
@@ -431,6 +437,21 @@ function renderRecipes(recipes) {
 
     container.appendChild(card);
   });
+}
+
+async function uploadPhoto(file) {
+  if (!file) return "";
+
+  const timestamp = Date.now();
+  const storageRef = ref(storage, `recipes/${timestamp}_${file.name}`);
+
+  // upload do cloud
+  const snapshot = await uploadBytes(storageRef, file);
+
+  // získanie URL
+  const photoUrl = await getDownloadURL(snapshot.ref);
+
+  return photoUrl;
 }
 
 let currentPage = 1;
